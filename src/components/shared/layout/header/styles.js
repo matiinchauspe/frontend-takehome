@@ -1,0 +1,16 @@
+import { makeStyles } from 'tss-react/mui';
+import { grey } from '@mui/material/colors';
+
+const useStyles = makeStyles()((theme) => ({
+  header: {
+    height: '50px',
+    borderBottom: `1px solid ${grey[300]}`,
+    padding: '10px',
+  },
+  title: {
+    color: theme.palette.primary.main,
+    fontWeight: 300,
+  },
+}));
+
+export default useStyles;
