@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { memo } from 'react';
 import { Select as MSelect, InputLabel, MenuItem, FormControl } from '@mui/material';
 
 import useStyles from './styles';
 
-const Select = () => {
-  const [age, setAge] = useState('');
+const Select = ({ items, selectedValue, onChange }) => {
+  const { classes } = useStyles();
+  // TODO: remove this later
+  console.log({ selectData: items });
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    onChange(event.target.value);
   };
-
-  const { classes } = useStyles();
 
   return (
     <FormControl fullWidth className={classes.container}>
@@ -18,19 +18,21 @@ const Select = () => {
       <MSelect
         labelId="select-collection"
         id="demo-simple-select"
-        value={age}
+        value={selectedValue}
         label="Collections"
         onChange={handleChange}
       >
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {items?.map((item) => (
+          <MenuItem key={`key_${item.id}`} value={item.id}>
+            {item.value}
+          </MenuItem>
+        ))}
       </MSelect>
     </FormControl>
   );
 };
 
-export default Select;
+export default memo(Select);

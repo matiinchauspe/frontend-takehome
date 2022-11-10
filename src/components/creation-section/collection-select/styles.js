@@ -1,9 +1,9 @@
 import { makeStyles } from 'tss-react/mui';
+import { grey } from '@mui/material/colors';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()({
   container: {
     padding: '10px',
-    borderRight: `1px solid ${theme.palette.primary.main}`,
     height: '100%',
     overflow: 'hidden',
   },
@@ -11,6 +11,11 @@ const useStyles = makeStyles()((theme) => ({
     height: 'calc(100% - 50px);',
     overflowY: 'auto',
   },
-}));
+  desc: {
+    fontWeight: 300,
+    color: grey[500],
+    fontSize: '13px',
+  },
+});
 
 export default useStyles;
