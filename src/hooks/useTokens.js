@@ -17,5 +17,5 @@ export const useTokens = (collectionId) => {
     fetcher
   );
 
-  return { data, error, isValidating };
+  return { data, error, isLoading: isValidating || !data };
 };

@@ -17,5 +17,5 @@ export const useCollections = () => {
     }
   );
 
-  return { data, error, isValidating };
+  return { data, error, isLoading: isValidating || !data };
 };

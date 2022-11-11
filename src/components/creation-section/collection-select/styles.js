@@ -10,6 +10,7 @@ const useStyles = makeStyles()({
   list: {
     height: 'calc(100% - 50px);',
     overflowY: 'auto',
+    padding: '5px 10px',
   },
   desc: {
     fontWeight: 300,

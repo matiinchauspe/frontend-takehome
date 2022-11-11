@@ -31,7 +31,8 @@
     "consistent-return": 0,
     "object-curly-newline": 0,
     "no-unused-vars": "warn",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off"
   },
   "globals": {
     "fetch": false

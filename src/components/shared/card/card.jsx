@@ -6,7 +6,7 @@ const Card = ({ title, media, content, actions }) => {
   const { classes } = useStyles();
 
   return (
-    <MCard className={classes.container}>
+    <MCard className={classes.container} elevation={4}>
       <CardContent className={classes.imageContainer}>
         <CardMedia
           component={media.type ?? 'img'}

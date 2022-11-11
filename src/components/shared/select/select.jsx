@@ -5,8 +5,6 @@ import useStyles from './styles';
 
 const Select = ({ items, selectedValue, onChange }) => {
   const { classes } = useStyles();
-  // TODO: remove this later
-  console.log({ selectData: items });
 
   const handleChange = (event) => {
     onChange(event.target.value);
