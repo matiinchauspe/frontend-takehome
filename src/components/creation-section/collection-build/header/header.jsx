@@ -1,9 +1,26 @@
+import { useState } from 'react';
+
+import { useCustomCollection } from '@hooks';
 import { Grid, Input, Button } from '@components/shared';
 
 import useStyles from './styles';
 
-const Header = () => {
+const Header = ({ nameRef }) => {
+  const [collectionName, setCollectionName] = useState('');
+  const { collectionInEdition, addToSavedCollections } = useCustomCollection();
   const { classes } = useStyles();
+
+  console.log({ ref: collectionName });
+
+  const allowSave = collectionInEdition.tokens.length && collectionName;
+
+  const handleSaveCollection = () => {
+    // TODO: review this later
+    addToSavedCollections({
+      name: collectionName,
+      tokens: collectionInEdition.tokens,
+    });
+  };
 
   return (
     <Grid
@@ -16,10 +33,21 @@ const Header = () => {
       className={classes.header}
     >
       <Grid item sm={9}>
-        <Input fullWidth label="Custom collection name" variant="outlined" />
+        <Input
+          fullWidth
+          label="Custom collection name"
+          variant="outlined"
+          onChange={(e) => setCollectionName(e.target.value)}
+        />
       </Grid>
-      <Grid item sm={3}>
-        <Button variant="outlined" fullWidth>
+      <Grid item sm={3} className={classes.buttonContainer}>
+        <Button
+          variant="outlined"
+          fullWidth
+          className={classes.button}
+          disabled={!allowSave}
+          onClick={handleSaveCollection}
+        >
           Save
         </Button>
       </Grid>

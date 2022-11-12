@@ -1,16 +1,19 @@
-import { TokensMock } from '@services/tokens/tokens.mock';
-import { TokensDataAdapter } from '@services/tokens/tokens.transform';
+import { useRef } from 'react';
+
+import { useCustomCollection } from '@hooks';
 
 import { Grid, Button, Text, List as TokensList, Card } from '@components/shared';
 import { Header } from './header';
 
 import useStyles from './styles';
 
-// TODO: remove this later
-const tokensMock = TokensDataAdapter(TokensMock);
-
 const CollectionBuild = () => {
+  const { collectionInEdition, removeTokenFromCollection } = useCustomCollection();
   const { classes } = useStyles();
+
+  const handleRemoveToken = (tokenId) => () => {
+    removeTokenFromCollection(tokenId);
+  };
 
   return (
     <Grid item container sm={7} xs={12} className={classes.container}>
@@ -18,32 +21,31 @@ const CollectionBuild = () => {
       <Header />
       {/* Tokens List */}
       <TokensList className={classes.list}>
-        {tokensMock.tokens.map((token) => (
-          <Grid item xs key={token.id}>
-            <Card
-              media={{ src: token.image, type: 'img' }}
-              title={token.name}
-              content={
-                /* eslint-disable react/jsx-wrap-multilines */
-                <>
+        {collectionInEdition.tokens.map((token) => (
+          <Card
+            key={token.id}
+            media={{ src: token.image, type: 'img' }}
+            title={token.name}
+            content={
+              /* eslint-disable react/jsx-wrap-multilines */
+              <>
+                <Text variant="body2" className={classes.desc}>
+                  {/* eslint-disable-next-line */}
+                  Last Sale: {token.lastSale.value} {token.lastSale.chain}
+                </Text>
+                {token.lastSale.date && (
                   <Text variant="body2" className={classes.desc}>
-                    {/* eslint-disable-next-line */}
-                    Last Sale: {token.lastSale.value} {token.lastSale.chain}
+                    {token.lastSale.date}
                   </Text>
-                  {token.lastSale.date && (
-                    <Text variant="body2" className={classes.desc}>
-                      {token.lastSale.date}
-                    </Text>
-                  )}
-                </>
-              }
-              actions={
-                <Button size="small" variant="outlined">
-                  Add
-                </Button>
-              }
-            />
-          </Grid>
+                )}
+              </>
+            }
+            actions={
+              <Button size="small" variant="outlined" onClick={handleRemoveToken(token.id)}>
+                Remove
+              </Button>
+            }
+          />
         ))}
       </TokensList>
     </Grid>

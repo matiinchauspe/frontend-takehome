@@ -2,8 +2,12 @@ import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
   container: {
-    minWidth: '200px',
     height: '250px',
+  },
+  card: {
+    height: '100%',
+    width: '250px',
+    minWidth: '200px',
     position: 'relative',
   },
   cardContent: {

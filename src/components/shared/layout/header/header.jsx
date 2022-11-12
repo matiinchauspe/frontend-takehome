@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, Text } from '@components/shared';
 
 import useStyles from './styles';
 
@@ -8,9 +8,9 @@ const Header = ({ title }) => {
   return (
     <Grid container>
       <Grid item xs={12} className={classes.header} textAlign="center">
-        <Typography variant="h6" align="center" className={classes.title}>
+        <Text variant="h6" align="center" className={classes.title}>
           {title}
-        </Typography>
+        </Text>
       </Grid>
     </Grid>
   );

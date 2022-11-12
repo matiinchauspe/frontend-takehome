@@ -1,14 +1,17 @@
 import { useState, useCallback, Suspense } from 'react';
 
-import { useCollections, useTokens } from '@hooks';
+import { useCollections, useTokens, useCustomCollection } from '@hooks';
 import { Grid, Text, Button, Skeleton, Select, List as TokensList, Card } from '@components/shared';
 
 import useStyles from './styles';
 
 const CollectionSelect = () => {
   const [collectionSelected, setCollectionSelected] = useState('');
+  // #Fetch
   const { data: collections } = useCollections();
   const { data: tokens, isLoading } = useTokens(collectionSelected);
+  // #--
+  const { addTokenToCollection, collectionInEdition } = useCustomCollection();
 
   // TODO: remove this later
   console.log({ collections });
@@ -19,6 +22,10 @@ const CollectionSelect = () => {
   const handleSelect = useCallback((val) => {
     setCollectionSelected(val);
   }, []);
+
+  const handleAddToken = (token) => () => {
+    addTokenToCollection(token);
+  };
 
   return (
     <Grid container item sm={5} className={classes.container}>
@@ -34,9 +41,12 @@ const CollectionSelect = () => {
       </Grid>
       {/* Tokens list */}
       <TokensList className={classes.list}>
-        {tokens?.tokens.map((token) => (
-          <Grid item xs key={token.id}>
+        {tokens?.tokens.map((token) => {
+          const alreadyExist = collectionInEdition.tokens.some((t) => t.id === token.id);
+
+          return (
             <Card
+              key={token.id}
               media={{ src: token.image, type: 'img' }}
               title={token.name}
               content={
@@ -54,13 +64,18 @@ const CollectionSelect = () => {
                 </>
               }
               actions={
-                <Button size="small" variant="outlined">
-                  Add
+                <Button
+                  size="small"
+                  variant="outlined"
+                  disabled={alreadyExist}
+                  onClick={handleAddToken(token)}
+                >
+                  {alreadyExist ? 'Added' : 'Add'}
                 </Button>
               }
             />
-          </Grid>
-        ))}
+          );
+        })}
       </TokensList>
     </Grid>
   );
