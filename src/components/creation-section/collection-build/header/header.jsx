@@ -5,12 +5,10 @@ import { Grid, Input, Button } from '@components/shared';
 
 import useStyles from './styles';
 
-const Header = ({ nameRef }) => {
+const Header = () => {
   const [collectionName, setCollectionName] = useState('');
   const { collectionInEdition, addToSavedCollections } = useCustomCollection();
   const { classes } = useStyles();
-
-  console.log({ ref: collectionName });
 
   const allowSave = collectionInEdition.tokens.length && collectionName;
 

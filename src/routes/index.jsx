@@ -1,9 +1,13 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 
-import { Creation } from '@pages/creation';
-import { ErrorPage } from '@pages/error-page';
-import { Layout } from '@components/shared';
+import { ErrorPage } from '@pages';
+import { Layout, Loading } from '@components/shared';
+
+import { ROUTE_PATHS } from './routes.constants';
+
+const LazyCreation = lazy(() => import('@pages/creation/creation'));
+const LazyList = lazy(() => import('@pages/saved-list/saved-list'));
 
 const router = createBrowserRouter([
   {
@@ -12,17 +16,25 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/collections',
-        element: <Creation />,
+        path: ROUTE_PATHS.CREATION,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <LazyCreation />
+          </Suspense>
+        ),
         index: true,
       },
       {
-        path: '/my-saved-collections',
-        element: <div>Saved collections list</div>,
+        path: ROUTE_PATHS.LIST,
+        element: (
+          <Suspense>
+            <LazyList />
+          </Suspense>
+        ),
       },
       {
         path: '/',
-        element: <Navigate to="/collections" replace />,
+        element: <Navigate to={ROUTE_PATHS.CREATION} replace />,
       },
     ],
   },

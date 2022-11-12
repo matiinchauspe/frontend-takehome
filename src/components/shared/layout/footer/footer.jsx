@@ -1,4 +1,4 @@
-import { Grid } from '@components/shared';
+import Grid from '@mui/material/Grid';
 
 import useStyles from './styles';
 

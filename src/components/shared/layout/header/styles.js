@@ -12,6 +12,10 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.primary.main,
     fontWeight: 300,
   },
+  button: {
+    backgroundColor: theme.palette.secondary.main,
+    color: 'white',
+  },
 }));
 
 export default useStyles;

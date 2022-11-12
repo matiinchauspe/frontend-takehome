@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Grid';
 
 const List = ({ className, children }) => (
   <Grid container columnSpacing={1} rowSpacing={1} className={className}>
