@@ -1,5 +1,5 @@
 import { makeStyles } from 'tss-react/mui';
-import { grey } from '@mui/material/colors';
+import { grey, red } from '@mui/material/colors';
 
 const useStyles = makeStyles()({
   container: {
@@ -16,6 +16,16 @@ const useStyles = makeStyles()({
     fontWeight: 300,
     color: grey[500],
     fontSize: '13px',
+  },
+  button: {
+    opacity: '0.8',
+    color: 'white',
+    backgroundColor: red[500],
+    border: 0,
+    '&:hover': {
+      backgroundColor: red[700],
+      border: 0,
+    },
   },
 });
 

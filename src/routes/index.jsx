@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.LIST,
         element: (
-          <Suspense>
+          <Suspense fallback={<Loading />}>
             <LazyList />
           </Suspense>
         ),

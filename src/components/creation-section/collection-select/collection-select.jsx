@@ -1,4 +1,5 @@
-import { useState, useCallback, Suspense } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useMemo, useEffect, useCallback, useTransition, Suspense } from 'react';
 
 import { useCollections, useTokens, useCustomCollection } from '@hooks';
 import { Grid, Text, Button, Skeleton, Select, List as TokensList, Card } from '@components/shared';
@@ -6,18 +7,20 @@ import { Grid, Text, Button, Skeleton, Select, List as TokensList, Card } from '
 import useStyles from './styles';
 
 const CollectionSelect = () => {
-  const [collectionSelected, setCollectionSelected] = useState('');
+  const [isPending, startTransition] = useTransition();
+  const { addTokenToCollection, collectionInEdition, collectionSelected, setCollectionSelected } =
+    useCustomCollection();
   // #Fetch
   const { data: collections } = useCollections();
-  const { data: tokens, isLoading } = useTokens(collectionSelected);
+  const { data: tokens } = useTokens(collectionSelected);
   // #--
-  const { addTokenToCollection, collectionInEdition } = useCustomCollection();
 
   // TODO: remove this later
+  // console.log({ collections: collectionsList });
   console.log({ collections });
   console.log({ tokens });
 
-  const { classes } = useStyles();
+  // const memoizedCollections = useMemo(() => collections, []);
 
   const handleSelect = useCallback((val) => {
     setCollectionSelected(val);
@@ -27,11 +30,19 @@ const CollectionSelect = () => {
     addTokenToCollection(token);
   };
 
+  // useEffect(() => {
+  //   startTransition(() => {
+  //     setCollectionsList(memoizedCollections);
+  //   });
+  // }, [memoizedCollections]);
+
+  const { classes } = useStyles();
+
   return (
     <Grid container item sm={5} className={classes.container}>
       {/* Select the collection */}
       <Grid item xs={12}>
-        <Suspense fallback={<Skeleton variant="rounded" width={210} height={60} />}>
+        <Suspense fallback={<Skeleton variant="rounded" width="100%" height={60} />}>
           <Select
             items={collections?.collections}
             selectedValue={collectionSelected}
@@ -66,8 +77,9 @@ const CollectionSelect = () => {
               actions={
                 <Button
                   size="small"
-                  variant="outlined"
+                  variant="contained"
                   disabled={alreadyExist}
+                  className={classes.button}
                   onClick={handleAddToken(token)}
                 >
                   {alreadyExist ? 'Added' : 'Add'}

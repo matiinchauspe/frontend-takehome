@@ -19,7 +19,7 @@ const Card = ({ title, media, content, actions }) => {
           <CardMedia
             component={media.type ?? 'img'}
             alt={title}
-            height="175"
+            height="140"
             image={media.src ?? avatar}
             className={classes.cardMedia}
           />

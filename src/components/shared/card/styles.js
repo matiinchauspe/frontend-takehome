@@ -2,12 +2,12 @@ import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
   container: {
-    height: '250px',
+    height: '230px',
   },
   card: {
     height: '100%',
-    width: '250px',
-    minWidth: '200px',
+    width: '185px',
+    minWidth: '175px',
     position: 'relative',
   },
   cardContent: {
@@ -17,9 +17,9 @@ const useStyles = makeStyles()((theme) => ({
     overflow: 'hidden',
     '&:hover': {
       transform: 'scale(1.1)',
-      transition: '1s ease-in-out',
+      transition: '.8s ease',
     },
-    objectFit: 'contain',
+    objectFit: 'cover',
   },
   imageContainer: {
     overflow: 'hidden',
@@ -27,7 +27,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   cardActions: {
     position: 'absolute',
-    bottom: 0,
+    top: 0,
     right: 0,
   },
   title: {

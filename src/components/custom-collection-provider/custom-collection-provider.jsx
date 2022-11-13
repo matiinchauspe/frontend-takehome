@@ -3,15 +3,17 @@ import { CustomCollectionProvider as CustomColProvider } from '@context';
 import { usePersistState } from '@hooks';
 
 const CustomCollectionProvider = ({ children }) => {
+  // #Initial States
+  // Custom collections
   const [savedCollections, setSavedCollections] = usePersistState('savedCollections', {
     collections: [],
     count: 0,
   });
-
-  const [collectionInEdition, setCollectionInEdition] = useState({
-    name: '',
-    tokens: [],
-  });
+  // Editing
+  const collectionEditionInitialState = { name: '', tokens: [] };
+  const [collectionInEdition, setCollectionInEdition] = useState(collectionEditionInitialState);
+  // Collection select
+  const [collectionSelected, setCollectionSelected] = useState('');
 
   // #Saved collections handlers
   const addToSavedCollections = (collection) => {
@@ -22,6 +24,8 @@ const CustomCollectionProvider = ({ children }) => {
       collections: newSavedCollections,
       count,
     });
+    // Collection reset state
+    setCollectionInEdition(collectionEditionInitialState);
   };
 
   const removeFromSavedCollections = (collectionId) => {
@@ -67,8 +71,12 @@ const CustomCollectionProvider = ({ children }) => {
   };
 
   const valueToProvider = {
+    // # Saved list
     addToSavedCollections,
     removeFromSavedCollections,
+    // # Selected
+    collectionSelected,
+    setCollectionSelected,
     // # Edition
     collectionInEdition,
     addTokenToCollection,

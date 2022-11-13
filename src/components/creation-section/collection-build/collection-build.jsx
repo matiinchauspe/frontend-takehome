@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-
 import { useCustomCollection } from '@hooks';
 
 import { Grid, Button, Text, List as TokensList, Card } from '@components/shared';
@@ -41,7 +39,12 @@ const CollectionBuild = () => {
               </>
             }
             actions={
-              <Button size="small" variant="outlined" onClick={handleRemoveToken(token.id)}>
+              <Button
+                size="small"
+                variant="outlined"
+                className={classes.button}
+                onClick={handleRemoveToken(token.id)}
+              >
                 Remove
               </Button>
             }
