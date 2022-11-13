@@ -9,6 +9,7 @@ const useStyles = makeStyles()(() => ({
     fontWeight: 300,
     fontSize: '13px',
     borderTop: `1px solid ${grey[300]}`,
+    boxShadow: `0px 1px 4px ${grey[500]}`,
     padding: '10px',
   },
 }));

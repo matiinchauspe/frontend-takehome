@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { v4 as uuid } from 'uuid';
+
 import { CustomCollectionProvider as CustomColProvider } from '@context';
 import { usePersistState } from '@hooks';
 
@@ -10,15 +12,31 @@ const CustomCollectionProvider = ({ children }) => {
     count: 0,
   });
   // Editing
-  const collectionEditionInitialState = { name: '', tokens: [] };
+  const collectionEditionInitialState = { name: '', status: 'create', tokens: [] };
   const [collectionInEdition, setCollectionInEdition] = useState(collectionEditionInitialState);
   // Collection select
   const [collectionSelected, setCollectionSelected] = useState('');
 
   // #Saved collections handlers
-  const addToSavedCollections = (collection) => {
-    const newSavedCollections = [...savedCollections.collections, collection];
-    const count = savedCollections.count + 1;
+  const addToSavedCollections = ({ status, ...collection }) => {
+    let newSavedCollections;
+    let count;
+    if (status === 'edit') {
+      const collectionIndex = savedCollections.collections.findIndex(
+        (col) => col.id === collection.id
+      );
+
+      newSavedCollections = [
+        ...savedCollections.collections.slice(0, collectionIndex),
+        { ...collection },
+        ...savedCollections.collections.slice(collectionIndex + 1),
+      ];
+      count = savedCollections.count;
+    } else {
+      // add collection with id created
+      newSavedCollections = [...savedCollections.collections, { ...collection, id: uuid() }];
+      count = savedCollections.count + 1;
+    }
 
     setSavedCollections({
       collections: newSavedCollections,
@@ -48,10 +66,19 @@ const CustomCollectionProvider = ({ children }) => {
     const collectionIndex = savedCollections.collections.findIndex(
       (col) => col.id === collectionId
     );
-    const currentCol = savedCollections.collections.filter((_, index) => index === collectionIndex);
+    const [currentCol] = savedCollections.collections.filter(
+      (_, index) => index === collectionIndex
+    );
 
-    setCollectionInEdition(currentCol);
+    setCollectionInEdition({ ...currentCol, status: 'edit' });
   };
+
+  const handleChangeCollectionName = useCallback((name) => {
+    setCollectionInEdition((prevState) => ({
+      ...prevState,
+      name,
+    }));
+  }, []);
 
   const addTokenToCollection = (token) => {
     setCollectionInEdition((prevState) => ({
@@ -72,6 +99,7 @@ const CustomCollectionProvider = ({ children }) => {
 
   const valueToProvider = {
     // # Saved list
+    savedCollections,
     addToSavedCollections,
     removeFromSavedCollections,
     // # Selected
@@ -79,6 +107,7 @@ const CustomCollectionProvider = ({ children }) => {
     setCollectionSelected,
     // # Edition
     collectionInEdition,
+    changeCollectionName: handleChangeCollectionName,
     addTokenToCollection,
     removeTokenFromCollection,
     selectCollectionToEdit,

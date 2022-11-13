@@ -10,10 +10,11 @@ const Header = ({ title, section }) => {
   const navigate = useNavigate();
   const { classes } = useStyles();
 
-  const buttonText = section === ROUTE_NAME_MAP.CREATION ? 'Go to custom list' : 'Back to creation';
+  const inCreationSection = section === ROUTE_NAME_MAP.CREATION;
+  const buttonText = inCreationSection ? 'Go to custom list' : 'Back to creation';
 
   const handleGoToSection = () =>
-    navigate(section === ROUTE_NAME_MAP.CREATION ? ROUTE_PATHS.LIST : ROUTE_PATHS.CREATION);
+    navigate(inCreationSection ? ROUTE_PATHS.LIST : ROUTE_PATHS.CREATION);
 
   return (
     <Grid
@@ -21,14 +22,20 @@ const Header = ({ title, section }) => {
       justifyContent="space-between"
       className={classes.header}
       alignItems="center"
-      direction={section === ROUTE_NAME_MAP.CREATION ? 'row' : 'row-reverse'}
+      direction={inCreationSection ? 'row' : 'row-reverse'}
     >
-      <Grid item xs={10} textAlign="center">
+      <Grid item xs={8} textAlign="center">
         <Typography variant="h6" align="center" className={classes.title}>
           {title}
         </Typography>
       </Grid>
-      <Grid item xs={2} textAlign="center">
+      <Grid
+        container
+        item
+        xs={4}
+        textAlign="center"
+        justifyContent={inCreationSection ? 'flex-end' : 'flex-start'}
+      >
         <Button
           variant="contained"
           size="small"

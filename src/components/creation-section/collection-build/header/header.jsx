@@ -1,23 +1,22 @@
-import { useState } from 'react';
-
 import { useCustomCollection } from '@hooks';
 import { Grid, Input, Button } from '@components/shared';
 
 import useStyles from './styles';
 
 const Header = () => {
-  const [collectionName, setCollectionName] = useState('');
-  const { collectionInEdition, addToSavedCollections } = useCustomCollection();
+  const { collectionInEdition, addToSavedCollections, changeCollectionName } =
+    useCustomCollection();
   const { classes } = useStyles();
 
-  const allowSave = collectionInEdition.tokens.length && collectionName;
+  const allowSaveOrEdit = collectionInEdition.tokens.length && collectionInEdition.name;
+  const isEditing = collectionInEdition.status === 'edit';
 
   const handleSaveCollection = () => {
-    // TODO: review this later
-    addToSavedCollections({
-      name: collectionName,
-      tokens: collectionInEdition.tokens,
-    });
+    addToSavedCollections(collectionInEdition);
+  };
+
+  const handleChangeCollectionName = ({ target }) => {
+    changeCollectionName(target.value);
   };
 
   return (
@@ -35,7 +34,8 @@ const Header = () => {
           fullWidth
           label="Custom collection name"
           variant="outlined"
-          onChange={(e) => setCollectionName(e.target.value)}
+          value={collectionInEdition.name}
+          onChange={handleChangeCollectionName}
         />
       </Grid>
       <Grid item sm={3} className={classes.buttonContainer}>
@@ -43,10 +43,10 @@ const Header = () => {
           variant="outlined"
           fullWidth
           className={classes.button}
-          disabled={!allowSave}
+          disabled={!allowSaveOrEdit}
           onClick={handleSaveCollection}
         >
-          Save
+          {isEditing ? 'Modify' : 'Save'}
         </Button>
       </Grid>
     </Grid>
