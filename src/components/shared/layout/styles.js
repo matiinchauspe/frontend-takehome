@@ -6,6 +6,7 @@ const useStyles = makeStyles()({
   },
   main: {
     height: 'calc(100vh - 100px)',
+    overflow: 'hidden',
   },
 });
 

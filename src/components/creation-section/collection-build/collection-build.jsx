@@ -14,7 +14,7 @@ const CollectionBuild = () => {
   };
 
   return (
-    <Grid item container sm={7} xs={12} className={classes.container}>
+    <Grid item container sm className={classes.container}>
       {/* Header */}
       <Header />
       {/* Tokens List */}

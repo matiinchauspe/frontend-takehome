@@ -18,7 +18,7 @@ const Layout = () => {
   return (
     <Container maxWidth={false} disableGutters className={classes.container}>
       <Header title={title} section={currentSection} />
-      <Container maxWidth={false} className={classes.main}>
+      <Container maxWidth={false} disableGutters className={classes.main}>
         <Outlet />
       </Container>
       <Footer />

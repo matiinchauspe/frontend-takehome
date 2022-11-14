@@ -24,7 +24,7 @@ const CollectionSelect = () => {
   const { classes } = useStyles();
 
   return (
-    <Grid container item sm={5} className={classes.container}>
+    <Grid container item sm={4} cx={{ padding: '10px' }} className={classes.container}>
       {/* Select the collection */}
       <Grid item xs={12}>
         <Suspense fallback={<Skeleton variant="rounded" width="100%" height={60} />}>

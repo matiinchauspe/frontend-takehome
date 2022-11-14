@@ -6,6 +6,7 @@ const useStyles = makeStyles()((theme) => ({
     padding: '10px',
     height: '100%',
     overflow: 'hidden',
+    backgroundColor: grey[200],
   },
   list: {
     height: 'calc(100% - 63px)',

@@ -1,4 +1,5 @@
-import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { Grid } from '@components/shared';
 import { CollectionBuild, CollectionSelect } from '@components/creation-section';
@@ -9,9 +10,11 @@ const Creation = () => {
   const { classes } = useStyles();
 
   return (
-    <Grid container columnSpacing={2} className={classes.container}>
-      <CollectionSelect />
-      <CollectionBuild />
+    <Grid container className={classes.container}>
+      <DndProvider backend={HTML5Backend}>
+        <CollectionSelect />
+        <CollectionBuild />
+      </DndProvider>
     </Grid>
   );
 };

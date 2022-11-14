@@ -1,3 +1,4 @@
+import { useDrag } from 'react-dnd';
 import {
   Grid,
   Card as MCard,
@@ -5,16 +6,27 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  Box,
 } from '@mui/material';
 
+import { ItemTypes } from '@constants';
 import avatar from '@assets/question.jpeg';
 import useStyles from './styles';
 
-const Card = ({ title, media, content, actions }) => {
-  const { classes } = useStyles();
+const Card = ({ isDraggable = true, title, media, content, actions }) => {
+  const [{ opacity }, dragRef, previewRef] = useDrag(() => ({
+    type: ItemTypes.CARD,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.4 : 1,
+    }),
+  }));
+
+  const { classes } = useStyles({ opacity });
+
   return (
     <Grid item xs className={classes.container}>
-      <MCard className={classes.card} elevation={4}>
+      <MCard ref={previewRef} className={classes.card} elevation={4}>
+        {isDraggable && <Box ref={dragRef} className={classes.dragHandle} />}
         <CardContent className={classes.imageContainer}>
           <CardMedia
             component={media.type ?? 'img'}

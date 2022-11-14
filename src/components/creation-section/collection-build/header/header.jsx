@@ -9,7 +9,7 @@ const Header = () => {
     useCustomCollection();
   const { classes } = useStyles();
 
-  const allowSaveOrEdit = collectionInEdition.tokens.length && collectionInEdition.name;
+  const allowSaveOrEdit = collectionInEdition.tokens.length && collectionInEdition.name.trim();
   const isEditing = collectionInEdition.status === Constants.CUSTOM_COLLECTION_STATUS.EDIT;
 
   const handleSaveCollection = () => {

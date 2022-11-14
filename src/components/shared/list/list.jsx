@@ -9,20 +9,14 @@ const List = ({
 }) => (
   <Grid container className={className}>
     {!hasData && !isLoading && (
-      <Grid container item xs={8} justifyContent="center" alignContent="center">
+      <Grid container item xs={12} justifyContent="center" alignContent="center">
         <Typography variant="h6" fontWeight={300} color="GrayText">
           {noDataMessage}
         </Typography>
       </Grid>
     )}
     {hasData && !isLoading && (
-      <Grid
-        container
-        columnSpacing={1}
-        rowSpacing={1}
-        alignContent="flex-start"
-        justifyContent="center"
-      >
+      <Grid container item spacing={1} alignContent="flex-start" justifyContent="center" xs={12}>
         {children}
       </Grid>
     )}
