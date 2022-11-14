@@ -5,7 +5,7 @@ const useStyles = makeStyles()((theme) => ({
   container: {
     boxShadow: `0px 1px 4px ${grey[500]}`,
     borderRadius: '10px',
-    padding: '10px',
+    padding: '15px',
     margin: '5px',
     height: '100px',
   },
@@ -23,6 +23,7 @@ const useStyles = makeStyles()((theme) => ({
       backgroundColor: theme.palette.secondary.second,
       border: 0,
     },
+    margin: '5px',
   },
   removeBtn: {
     opacity: '0.8',
@@ -33,6 +34,7 @@ const useStyles = makeStyles()((theme) => ({
       backgroundColor: red[700],
       border: 0,
     },
+    margin: '5px',
   },
 }));
 

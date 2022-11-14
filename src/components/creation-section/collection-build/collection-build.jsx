@@ -18,14 +18,13 @@ const CollectionBuild = () => {
       {/* Header */}
       <Header />
       {/* Tokens List */}
-      <TokensList className={classes.list}>
+      <TokensList className={classes.list} hasData={Boolean(collectionInEdition.tokens.length)}>
         {collectionInEdition.tokens.map((token) => (
           <Card
             key={token.id}
             media={{ src: token.image, type: 'img' }}
             title={token.name}
             content={
-              /* eslint-disable react/jsx-wrap-multilines */
               <>
                 <Text variant="body2" className={classes.desc}>
                   {/* eslint-disable-next-line */}

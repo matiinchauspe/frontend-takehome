@@ -32,7 +32,9 @@
     "object-curly-newline": 0,
     "no-unused-vars": "warn",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-wrap-multilines": "off"
   },
   "globals": {
     "fetch": false

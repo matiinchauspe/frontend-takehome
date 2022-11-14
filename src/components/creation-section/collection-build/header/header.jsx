@@ -1,3 +1,4 @@
+import { Constants } from '@utils';
 import { useCustomCollection } from '@hooks';
 import { Grid, Input, Button } from '@components/shared';
 
@@ -9,7 +10,7 @@ const Header = () => {
   const { classes } = useStyles();
 
   const allowSaveOrEdit = collectionInEdition.tokens.length && collectionInEdition.name;
-  const isEditing = collectionInEdition.status === 'edit';
+  const isEditing = collectionInEdition.status === Constants.CUSTOM_COLLECTION_STATUS.EDIT;
 
   const handleSaveCollection = () => {
     addToSavedCollections(collectionInEdition);

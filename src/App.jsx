@@ -1,5 +1,5 @@
-import React, { StrictMode } from 'react';
-// import { SWRConfig } from 'swr';
+import { StrictMode } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from '@mui/material/styles';
 
 import { CustomCollectionProvider } from '@components/custom-collection-provider';
@@ -15,6 +15,7 @@ const App = () => (
       <CustomCollectionProvider>
         <Routes />
       </CustomCollectionProvider>
+      <Toaster position="bottom-center" />
       {/* </SWRConfig> */}
     </ThemeProvider>
   </StrictMode>

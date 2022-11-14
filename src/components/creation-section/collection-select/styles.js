@@ -8,7 +8,7 @@ const useStyles = makeStyles()((theme) => ({
     overflow: 'hidden',
   },
   list: {
-    height: 'calc(100% - 50px);',
+    height: 'calc(100% - 63px)',
     overflowY: 'auto',
     padding: '5px 10px',
   },

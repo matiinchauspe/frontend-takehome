@@ -1,6 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
+import { toast } from 'react-hot-toast';
 import { v4 as uuid } from 'uuid';
 
+import { Constants } from '@utils';
 import { CustomCollectionProvider as CustomColProvider } from '@context';
 import { usePersistState } from '@hooks';
 
@@ -12,7 +14,11 @@ const CustomCollectionProvider = ({ children }) => {
     count: 0,
   });
   // Editing
-  const collectionEditionInitialState = { name: '', status: 'create', tokens: [] };
+  const collectionEditionInitialState = {
+    name: '',
+    status: Constants.CUSTOM_COLLECTION_STATUS.CREATE,
+    tokens: [],
+  };
   const [collectionInEdition, setCollectionInEdition] = useState(collectionEditionInitialState);
   // Collection select
   const [collectionSelected, setCollectionSelected] = useState('');
@@ -21,7 +27,7 @@ const CustomCollectionProvider = ({ children }) => {
   const addToSavedCollections = ({ status, ...collection }) => {
     let newSavedCollections;
     let count;
-    if (status === 'edit') {
+    if (status === Constants.CUSTOM_COLLECTION_STATUS.EDIT) {
       const collectionIndex = savedCollections.collections.findIndex(
         (col) => col.id === collection.id
       );
@@ -31,6 +37,7 @@ const CustomCollectionProvider = ({ children }) => {
         { ...collection },
         ...savedCollections.collections.slice(collectionIndex + 1),
       ];
+      console.log({ collectionsFromEdit: newSavedCollections });
       count = savedCollections.count;
     } else {
       // add collection with id created
@@ -44,9 +51,19 @@ const CustomCollectionProvider = ({ children }) => {
     });
     // Collection reset state
     setCollectionInEdition(collectionEditionInitialState);
+
+    toast.success(
+      <span>
+        Collection <b>{collection.name}</b>{' '}
+        {status === Constants.CUSTOM_COLLECTION_STATUS.EDIT ? 'modified' : 'saved'}!
+      </span>
+    );
   };
 
   const removeFromSavedCollections = (collectionId) => {
+    // To show collection removed name!
+    const currentSavedCollections = savedCollections.collections;
+
     const collectionIndex = savedCollections.collections.findIndex(
       (col) => col.id === collectionId
     );
@@ -59,6 +76,15 @@ const CustomCollectionProvider = ({ children }) => {
       collections: newSavedCollections,
       count,
     });
+    // Collection reset state
+    setCollectionInEdition(collectionEditionInitialState);
+
+    toast.success(
+      <span>
+        {/* eslint-disable-next-line  */}
+        Collection <b>{currentSavedCollections[collectionIndex].name}</b> removed!
+      </span>
+    );
   };
 
   // #Edition - When we want to edit a particular collection
@@ -70,7 +96,7 @@ const CustomCollectionProvider = ({ children }) => {
       (_, index) => index === collectionIndex
     );
 
-    setCollectionInEdition({ ...currentCol, status: 'edit' });
+    setCollectionInEdition({ ...currentCol, status: Constants.CUSTOM_COLLECTION_STATUS.EDIT });
   };
 
   const handleChangeCollectionName = useCallback((name) => {
@@ -80,12 +106,12 @@ const CustomCollectionProvider = ({ children }) => {
     }));
   }, []);
 
-  const addTokenToCollection = (token) => {
+  const addTokenToCollection = useCallback((token) => {
     setCollectionInEdition((prevState) => ({
       ...prevState,
       tokens: [...prevState.tokens, token],
     }));
-  };
+  }, []);
 
   const removeTokenFromCollection = (tokenId) => {
     const tokenIndex = collectionInEdition.tokens.findIndex((t) => t.id === tokenId);
@@ -97,21 +123,24 @@ const CustomCollectionProvider = ({ children }) => {
     }));
   };
 
-  const valueToProvider = {
-    // # Saved list
-    savedCollections,
-    addToSavedCollections,
-    removeFromSavedCollections,
-    // # Selected
-    collectionSelected,
-    setCollectionSelected,
-    // # Edition
-    collectionInEdition,
-    changeCollectionName: handleChangeCollectionName,
-    addTokenToCollection,
-    removeTokenFromCollection,
-    selectCollectionToEdit,
-  };
+  const valueToProvider = useMemo(
+    () => ({
+      // # Saved list
+      savedCollections,
+      addToSavedCollections,
+      removeFromSavedCollections,
+      // # Selected
+      collectionSelected,
+      setCollectionSelected,
+      // # Edition
+      collectionInEdition,
+      changeCollectionName: handleChangeCollectionName,
+      addTokenToCollection,
+      removeTokenFromCollection,
+      selectCollectionToEdit,
+    }),
+    [collectionInEdition, collectionSelected, savedCollections]
+  );
 
   return <CustomColProvider value={valueToProvider}>{children}</CustomColProvider>;
 };

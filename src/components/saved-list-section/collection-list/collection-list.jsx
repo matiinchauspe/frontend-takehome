@@ -9,6 +9,8 @@ const CollectionList = () => {
   const { savedCollections } = useCustomCollection();
   const { classes } = useStyles();
 
+  console.log({ savedCollections });
+
   return (
     <Grid item container xs={12} className={classes.container}>
       <List className={classes.list} hasData={Boolean(savedCollections.count)}>

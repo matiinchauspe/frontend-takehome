@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useMemo, useEffect, useCallback, useTransition, Suspense } from 'react';
+import { useCallback, Suspense } from 'react';
 
 import { useCollections, useTokens, useCustomCollection } from '@hooks';
 import { Grid, Text, Button, Skeleton, Select, List as TokensList, Card } from '@components/shared';
@@ -7,21 +7,12 @@ import { Grid, Text, Button, Skeleton, Select, List as TokensList, Card } from '
 import useStyles from './styles';
 
 const CollectionSelect = () => {
-  const [isPending, startTransition] = useTransition();
   const { addTokenToCollection, collectionInEdition, collectionSelected, setCollectionSelected } =
     useCustomCollection();
   // #Fetch
   const { data: collections } = useCollections();
-  const { data: tokens } = useTokens(collectionSelected);
+  const { data: tokens, isLoading } = useTokens(collectionSelected);
   // #--
-
-  // TODO: remove this later
-  // console.log({ collections: collectionsList });
-  console.log({ collections });
-  console.log({ tokens });
-
-  // const memoizedCollections = useMemo(() => collections, []);
-
   const handleSelect = useCallback((val) => {
     setCollectionSelected(val);
   }, []);
@@ -29,12 +20,6 @@ const CollectionSelect = () => {
   const handleAddToken = (token) => () => {
     addTokenToCollection(token);
   };
-
-  // useEffect(() => {
-  //   startTransition(() => {
-  //     setCollectionsList(memoizedCollections);
-  //   });
-  // }, [memoizedCollections]);
 
   const { classes } = useStyles();
 
@@ -51,7 +36,12 @@ const CollectionSelect = () => {
         </Suspense>
       </Grid>
       {/* Tokens list */}
-      <TokensList className={classes.list}>
+      <TokensList
+        hasData={Boolean(tokens?.tokens.length)}
+        noDataMessage="Select a collection"
+        isLoading={isLoading}
+        className={classes.list}
+      >
         {tokens?.tokens.map((token) => {
           const alreadyExist = collectionInEdition.tokens.some((t) => t.id === token.id);
 
@@ -61,10 +51,8 @@ const CollectionSelect = () => {
               media={{ src: token.image, type: 'img' }}
               title={token.name}
               content={
-                /* eslint-disable react/jsx-wrap-multilines */
                 <>
                   <Text variant="body2" className={classes.desc}>
-                    {/* eslint-disable-next-line */}
                     Last Sale: {token.lastSale.value} {token.lastSale.chain}
                   </Text>
                   {token.lastSale.date && (
