@@ -39,6 +39,8 @@ const CollectionSelect = () => {
       <TokensList
         hasData={Boolean(tokens?.tokens.length)}
         noDataMessage="Select a collection"
+        centered
+        cols={11}
         isLoading={isLoading}
         className={classes.list}
       >
@@ -48,16 +50,17 @@ const CollectionSelect = () => {
           return (
             <Card
               key={token.id}
+              fixedWidth={false}
               media={{ src: token.image, type: 'img' }}
               title={token.name}
               content={
                 <>
-                  <Text variant="body2" className={classes.desc}>
+                  <Text className={classes.desc} component="div">
                     Last Sale: {token.lastSale.value} {token.lastSale.chain}
                   </Text>
                   {token.lastSale.date && (
-                    <Text variant="body2" className={classes.desc}>
-                      {token.lastSale.date}
+                    <Text className={classes.desc} component="div">
+                      Date: {token.lastSale.date}
                     </Text>
                   )}
                 </>

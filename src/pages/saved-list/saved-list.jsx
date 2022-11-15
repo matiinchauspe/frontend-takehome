@@ -7,7 +7,7 @@ const SavedList = () => {
   const { classes } = useStyles();
 
   return (
-    <Grid container columnSpacing={2} justifyContent="center" className={classes.container}>
+    <Grid container className={classes.container}>
       <CollectionList />
     </Grid>
   );

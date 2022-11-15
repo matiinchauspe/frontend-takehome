@@ -2,13 +2,8 @@ import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()({
   container: {
+    height: 'calc(100vh - 100px);',
     overflow: 'hidden',
-    height: '100%',
-  },
-  list: {
-    height: '100%',
-    overflowY: 'auto',
-    // padding: '5px 10px',
   },
 });
 

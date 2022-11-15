@@ -1,24 +1,35 @@
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles()((theme, props) => ({
-  container: {
-    height: '230px',
-  },
+const useStyles = makeStyles()((theme, { fixedWidth, opacity }) => ({
   card: {
-    opacity: props.opacity,
-    height: '100%',
-    width: '185px',
+    opacity,
+    height: '230px',
+    width: fixedWidth ? '200px' : '100%',
     minWidth: '175px',
     position: 'relative',
   },
   dragHandle: {
-    backgroundColor: 'green',
+    content: '"...."',
+    width: '20px',
+    height: '22px',
     position: 'absolute',
+    overflow: 'hidden',
+    lineHeight: '5px',
     bottom: 0,
-    left: 0,
-    width: '1rem',
-    height: '1rem',
+    right: 0,
+    padding: '4px 2px',
     cursor: 'move',
+    verticalAlign: 'middle',
+    marginTop: '-.7em',
+    marginRight: '.3em',
+    fontSize: '13px',
+    fontFamily: 'sans-serif',
+    letterSpacing: '2px',
+    color: '#cccccc',
+    textShadow: '1px 0 1px black',
+    '&:after': {
+      content: '".... .... .... ...."',
+    },
   },
   cardContent: {
     padding: '5px',
@@ -43,6 +54,7 @@ const useStyles = makeStyles()((theme, props) => ({
   title: {
     fontWeight: 400,
     color: theme.palette.primary.second,
+    marginBottom: '2px',
   },
 }));
 

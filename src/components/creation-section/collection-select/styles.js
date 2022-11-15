@@ -1,12 +1,12 @@
 import { makeStyles } from 'tss-react/mui';
-import { grey } from '@mui/material/colors';
+import { grey, cyan } from '@mui/material/colors';
 
 const useStyles = makeStyles()((theme) => ({
   container: {
     padding: '10px',
     height: '100%',
     overflow: 'hidden',
-    backgroundColor: grey[200],
+    backgroundColor: cyan[50],
   },
   list: {
     height: 'calc(100% - 63px)',
@@ -16,7 +16,7 @@ const useStyles = makeStyles()((theme) => ({
   desc: {
     fontWeight: 300,
     color: grey[500],
-    fontSize: '13px',
+    fontSize: '14px',
   },
   button: {
     opacity: '0.8',

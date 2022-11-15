@@ -5,8 +5,8 @@ const TokenTransForm = ({ token, market }) => ({
   name: token.name ?? 'Unknown',
   image: token.image,
   lastSale: {
-    value: token.lastSell?.value ?? null,
-    date: token.lastSell?.timestamp ? dateFromTimestamp(token.lastSell.timestamp) : null,
+    value: token.lastSell?.value ?? ' -- ',
+    date: token.lastSell?.timestamp ? dateFromTimestamp(token.lastSell.timestamp) : ' -- ',
     chain: market.floorAsk?.price?.currency.symbol ?? null,
   },
 });

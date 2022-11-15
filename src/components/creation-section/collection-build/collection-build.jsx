@@ -24,15 +24,15 @@ const CollectionBuild = () => {
             key={token.id}
             media={{ src: token.image, type: 'img' }}
             title={token.name}
+            isDraggable={false}
             content={
               <>
                 <Text variant="body2" className={classes.desc}>
-                  {/* eslint-disable-next-line */}
                   Last Sale: {token.lastSale.value} {token.lastSale.chain}
                 </Text>
                 {token.lastSale.date && (
                   <Text variant="body2" className={classes.desc}>
-                    {token.lastSale.date}
+                    Date: {token.lastSale.date}
                   </Text>
                 )}
               </>
