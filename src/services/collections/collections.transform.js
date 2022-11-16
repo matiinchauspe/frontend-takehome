@@ -3,9 +3,6 @@ const CollectionTransForm = (collection) => ({
   value: collection.name,
 });
 
-const CollectionsDataAdapter = (data) => ({
-  collections: data?.collections.map(CollectionTransForm) ?? null,
-  continuation: data?.continuation ?? null,
-});
+const CollectionsDataAdapter = ({ collections }) => collections?.map(CollectionTransForm) ?? null;
 
 export { CollectionsDataAdapter };

@@ -1,5 +1,5 @@
 import { makeStyles } from 'tss-react/mui';
-import { grey, cyan } from '@mui/material/colors';
+import { cyan } from '@mui/material/colors';
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -7,6 +7,7 @@ const useStyles = makeStyles()((theme) => ({
     height: '100%',
     overflow: 'hidden',
     backgroundColor: cyan[50],
+    boxShadow: `1px 1px 1px ${theme.palette.grey[200]}`,
   },
   list: {
     height: 'calc(100% - 63px)',
@@ -15,7 +16,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   desc: {
     fontWeight: 300,
-    color: grey[500],
+    color: theme.palette.grey[500],
     fontSize: '14px',
   },
   button: {

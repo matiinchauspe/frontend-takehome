@@ -1,8 +1,8 @@
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles()((theme, { fixedWidth, opacity }) => ({
+const useStyles = makeStyles()((theme, { fixedWidth, isDragging }) => ({
   card: {
-    opacity,
+    opacity: isDragging ? 0.4 : 1,
     height: '230px',
     width: fixedWidth ? '200px' : '100%',
     minWidth: '175px',

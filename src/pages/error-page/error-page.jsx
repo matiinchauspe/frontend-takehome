@@ -1,6 +1,5 @@
-import React from 'react';
-import { Container, Grid } from '@mui/material';
 import { useRouteError } from 'react-router-dom';
+import { Container, Grid } from '@mui/material';
 
 const ErrorPage = () => {
   const error = useRouteError();

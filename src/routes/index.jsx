@@ -2,7 +2,8 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 
 import { ErrorPage } from '@pages';
-import { Layout, Loading } from '@components/shared';
+import { Layout } from '@components/layout';
+import { Loading } from '@components/shared';
 
 import { ROUTE_PATHS } from './routes.constants';
 

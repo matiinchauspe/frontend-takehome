@@ -1,58 +1,66 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, Suspense } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import { useCollections, useTokens, useCustomCollection } from '@hooks';
-import { Grid, Text, Button, Skeleton, Select, List as TokensList, Card } from '@components/shared';
+import { Grid, Text, Button, Select, List as TokensList, Card } from '@components/shared';
 
 import useStyles from './styles';
 
 const CollectionSelect = () => {
-  const { addTokenToCollection, collectionInEdition, collectionSelected, setCollectionSelected } =
-    useCustomCollection();
+  const {
+    addTokenToCollection,
+    collectionSelected,
+    collectionInEdition,
+    setCollectionSelected,
+    setCurrentTokensList,
+    currentTokensList,
+  } = useCustomCollection();
   // #Fetch
   const { data: collections } = useCollections();
   const { data: tokens, isLoading } = useTokens(collectionSelected);
-  // #--
+
   const handleSelect = useCallback((val) => {
     setCollectionSelected(val);
   }, []);
 
-  const handleAddToken = (token) => () => {
-    addTokenToCollection(token);
+  const handleAddToken = (tokenId) => () => {
+    addTokenToCollection(tokenId);
   };
+
+  useEffect(() => {
+    if (tokens) {
+      setCurrentTokensList(tokens);
+    }
+  }, [tokens, currentTokensList]);
 
   const { classes } = useStyles();
 
   return (
-    <Grid container item sm={4} cx={{ padding: '10px' }} className={classes.container}>
+    <Grid container item sm={4} className={classes.container}>
       {/* Select the collection */}
       <Grid item xs={12}>
-        <Suspense fallback={<Skeleton variant="rounded" width="100%" height={60} />}>
-          <Select
-            items={collections?.collections}
-            selectedValue={collectionSelected}
-            onChange={handleSelect}
-          />
-        </Suspense>
+        <Select items={collections} selectedValue={collectionSelected} onChange={handleSelect} />
       </Grid>
       {/* Tokens list */}
       <TokensList
-        hasData={Boolean(tokens?.tokens.length)}
+        hasData={Boolean(tokens?.length)}
         noDataMessage="Select a collection"
         centered
-        cols={11}
         isLoading={isLoading}
+        cols={11}
         className={classes.list}
       >
-        {tokens?.tokens.map((token) => {
-          const alreadyExist = collectionInEdition.tokens.some((t) => t.id === token.id);
+        {tokens?.map((token) => {
+          const added = collectionInEdition.tokens.some((t) => t.id === token.id);
 
           return (
             <Card
-              key={token.id}
+              id={token.id}
+              key={`token_${token.id}`}
               fixedWidth={false}
               media={{ src: token.image, type: 'img' }}
               title={token.name}
+              isDraggable={!added}
               content={
                 <>
                   <Text className={classes.desc} component="div">
@@ -69,11 +77,11 @@ const CollectionSelect = () => {
                 <Button
                   size="small"
                   variant="contained"
-                  disabled={alreadyExist}
+                  disabled={added}
                   className={classes.button}
-                  onClick={handleAddToken(token)}
+                  onClick={handleAddToken(token.id)}
                 >
-                  {alreadyExist ? 'Added' : 'Add'}
+                  {added ? 'Added' : 'Add'}
                 </Button>
               }
             />

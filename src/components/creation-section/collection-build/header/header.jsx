@@ -1,5 +1,8 @@
-import { Constants } from '@utils';
+import { memo } from 'react';
+
+import { CUSTOM_COLLECTION_STATUS } from '@constants';
 import { useCustomCollection } from '@hooks';
+
 import { Grid, Input, Button } from '@components/shared';
 
 import useStyles from './styles';
@@ -10,7 +13,7 @@ const Header = () => {
   const { classes } = useStyles();
 
   const allowSaveOrEdit = collectionInEdition.tokens.length && collectionInEdition.name.trim();
-  const isEditing = collectionInEdition.status === Constants.CUSTOM_COLLECTION_STATUS.EDIT;
+  const isEditing = collectionInEdition.status === CUSTOM_COLLECTION_STATUS.EDIT;
 
   const handleSaveCollection = () => {
     addToSavedCollections(collectionInEdition);
@@ -54,4 +57,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

@@ -1,7 +1,7 @@
 import { makeStyles } from 'tss-react/mui';
-import { grey, red } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
 
-const useStyles = makeStyles()({
+const useStyles = makeStyles()((theme, { isOverList }) => ({
   container: {
     padding: '10px',
     overflow: 'hidden',
@@ -11,10 +11,12 @@ const useStyles = makeStyles()({
     height: 'calc(100% - 63px)',
     overflowY: 'auto',
     padding: '5px 10px',
+    borderRadius: '10px',
+    backgroundColor: isOverList ? theme.palette.grey[300] : 'inherit',
   },
   desc: {
     fontWeight: 300,
-    color: grey[500],
+    color: theme.palette.grey[500],
     fontSize: '13px',
   },
   button: {
@@ -27,6 +29,6 @@ const useStyles = makeStyles()({
       border: 0,
     },
   },
-});
+}));
 
 export default useStyles;

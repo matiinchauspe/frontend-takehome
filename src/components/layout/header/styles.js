@@ -1,10 +1,9 @@
 import { makeStyles } from 'tss-react/mui';
-import { grey } from '@mui/material/colors';
 
 const useStyles = makeStyles()((theme) => ({
   header: {
     height: '50px',
-    borderBottom: `1px solid ${grey[300]}`,
+    borderBottom: `1px solid ${theme.palette.grey[300]}`,
     padding: '10px',
   },
   title: {

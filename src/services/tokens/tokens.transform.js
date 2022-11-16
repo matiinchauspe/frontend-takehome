@@ -11,9 +11,6 @@ const TokenTransForm = ({ token, market }) => ({
   },
 });
 
-const TokensDataAdapter = (data) => ({
-  tokens: data?.tokens.map(TokenTransForm) ?? null,
-  continuation: data?.continuation ?? null,
-});
+const TokensDataAdapter = ({ tokens }) => tokens?.map(TokenTransForm) ?? null;
 
 export { TokensDataAdapter };

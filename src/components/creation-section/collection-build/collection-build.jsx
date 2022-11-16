@@ -1,4 +1,7 @@
+import { useDrop } from 'react-dnd';
+
 import { useCustomCollection } from '@hooks';
+import { ItemTypes } from '@constants';
 
 import { Grid, Button, Text, List as TokensList, Card } from '@components/shared';
 import { Header } from './header';
@@ -6,8 +9,16 @@ import { Header } from './header';
 import useStyles from './styles';
 
 const CollectionBuild = () => {
-  const { collectionInEdition, removeTokenFromCollection } = useCustomCollection();
-  const { classes } = useStyles();
+  const { collectionInEdition, removeTokenFromCollection, addTokenToCollection } =
+    useCustomCollection();
+  const [{ isOver }, dropRef] = useDrop({
+    accept: ItemTypes.CARD,
+    drop: (item) => addTokenToCollection(item.id),
+    collect: (monitor) => ({
+      isOver: Boolean(monitor.isOver()),
+    }),
+  });
+  const { classes } = useStyles({ isOverList: isOver });
 
   const handleRemoveToken = (tokenId) => () => {
     removeTokenFromCollection(tokenId);
@@ -18,13 +29,17 @@ const CollectionBuild = () => {
       {/* Header */}
       <Header />
       {/* Tokens List */}
-      <TokensList className={classes.list} hasData={Boolean(collectionInEdition.tokens.length)}>
+      <TokensList
+        className={classes.list}
+        hasData={Boolean(collectionInEdition.tokens.length)}
+        ref={dropRef}
+      >
         {collectionInEdition.tokens.map((token) => (
           <Card
-            key={token.id}
+            id={token.id}
+            key={`token_${token.id}`}
             media={{ src: token.image, type: 'img' }}
             title={token.name}
-            isDraggable={false}
             content={
               <>
                 <Text variant="body2" className={classes.desc}>

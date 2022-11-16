@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import useSWR from 'swr';
 
 import { tokensUrl, fetcher } from '@api';
@@ -6,7 +7,6 @@ import { TokensTransform } from '@services';
 export const useTokens = (collectionId) => {
   const queryParams = `?collection=${collectionId}`;
   const { data, error, isValidating } = useSWR(
-    /* eslint-disable indent */
     collectionId
       ? {
           url: tokensUrl,
@@ -14,7 +14,8 @@ export const useTokens = (collectionId) => {
           transform: TokensTransform.TokensDataAdapter,
         }
       : null,
-    fetcher
+    fetcher,
+    { revalidateOnFocus: false }
   );
 
   return { data, error, isLoading: isValidating };

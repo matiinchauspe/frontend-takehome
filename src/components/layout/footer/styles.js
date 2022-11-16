@@ -1,14 +1,13 @@
 import { makeStyles } from 'tss-react/mui';
-import { grey } from '@mui/material/colors';
 
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()((theme) => ({
   footer: {
     height: '50px',
     textAlign: 'center',
-    color: grey[500],
+    color: theme.palette.grey[500],
     fontWeight: 300,
     fontSize: '13px',
-    borderTop: `1px solid ${grey[300]}`,
+    borderTop: `1px solid ${theme.palette.grey[300]}`,
     padding: '10px',
   },
 }));

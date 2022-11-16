@@ -20,9 +20,6 @@ const Select = ({ items, selectedValue, onChange }) => {
         label="Collections"
         onChange={handleChange}
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
         {items?.map((item) => (
           <MenuItem key={`key_${item.id}`} value={item.id}>
             {item.value}

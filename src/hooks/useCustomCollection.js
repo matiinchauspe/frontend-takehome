@@ -5,7 +5,7 @@ export const useCustomCollection = () => {
   const context = useContext(CustomCollectionContext);
 
   if (context === null) {
-    throw new Error("'AuthContext' cannot be null");
+    throw new Error("'CustomCollectionContext' cannot be null");
   }
 
   return context;

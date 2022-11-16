@@ -1,9 +1,9 @@
 import { makeStyles } from 'tss-react/mui';
-import { grey, red } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
 
 const useStyles = makeStyles()((theme) => ({
   container: {
-    boxShadow: `0px 1px 4px ${grey[500]}`,
+    boxShadow: `0px 1px 4px ${theme.palette.grey[500]}`,
     borderRadius: '10px',
     padding: '15px',
     margin: '5px',
@@ -11,7 +11,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   text: {
     fontWeight: 300,
-    color: grey[700],
+    color: theme.palette.grey[700],
   },
   actions: {},
   editBtn: {
