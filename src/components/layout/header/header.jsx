@@ -41,6 +41,7 @@ const Header = ({ title, section }) => {
           size="small"
           className={classes.button}
           onClick={handleGoToSection}
+          role="button"
         >
           {buttonText}
         </Button>

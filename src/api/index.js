@@ -1,4 +1,4 @@
-const { VITE_APP_API_URL: baseUrl } = import.meta.env;
+const { VITE_APP_API_URL: baseUrl } = process.env;
 
 /**
  * It takes an object with a url and a transform function, fetches the url, transforms the data, and

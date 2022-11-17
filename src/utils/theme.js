@@ -12,7 +12,4 @@ export const theme = createTheme({
       second: teal[600],
     },
   },
-  grid: {
-    cols: 12,
-  },
 });

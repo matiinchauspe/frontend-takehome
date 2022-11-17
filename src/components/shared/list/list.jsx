@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Grid, Typography, CircularProgress, useTheme } from '@mui/material';
+import { Grid, Typography, CircularProgress } from '@mui/material';
 
 const List = forwardRef(
   (
@@ -7,15 +7,16 @@ const List = forwardRef(
       hasData = true,
       noDataMessage = 'Items not found',
       isLoading,
-      cols,
+      cols = 12,
       centered = false,
       className,
       children,
     },
     ref
   ) => {
-    const theme = useTheme();
-    const defaultCols = theme.grid.cols;
+    // TODO: review this later - test problem
+    // const theme = useTheme();
+    // const defaultCols = 12;
 
     return (
       <Grid
@@ -37,7 +38,7 @@ const List = forwardRef(
             item
             gap={1}
             alignContent="flex-start"
-            xs={cols ?? defaultCols}
+            xs={cols}
             justifyContent={centered ? 'center' : 'flex-start'}
           >
             {children}
