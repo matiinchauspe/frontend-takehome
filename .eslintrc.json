@@ -1,6 +1,6 @@
 {
-  "extends": "airbnb",
-  "plugins": ["react", "react-hooks"],
+  "extends": ["airbnb", "plugin:testing-library/react"],
+  "plugins": ["react", "react-hooks", "testing-library"],
   "env": {
     "jest": true,
     "browser": true,

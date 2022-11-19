@@ -17,7 +17,7 @@ describe('Layout <Header />', () => {
 
   const handleClick = jest.fn();
 
-  test('render component', () => {
+  test('render content', () => {
     component.getByText(headerProps.title);
   });
 
