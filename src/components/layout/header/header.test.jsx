@@ -1,31 +1,28 @@
-import { render, fireEvent } from '@utils/test';
+import { render, screen, fireEvent } from '@utils/test';
 
 import Header from './header';
 
 describe('Layout <Header />', () => {
-  let component;
-  let headerProps;
+  const props = {
+    title: 'Create custom collection',
+    section: 'creation',
+  };
+  const onSpyClick = jest.fn();
+  const setup = () => {
+    render(<Header {...props} />);
+  };
 
-  beforeEach(() => {
-    headerProps = {
-      title: 'Create custom collection',
-      section: 'creation',
-    };
-
-    component = render(<Header title={headerProps.title} section={headerProps.section} />);
-  });
-
-  const handleClick = jest.fn();
-
-  test('render component', () => {
-    component.getByText(headerProps.title);
+  test('render content', () => {
+    setup();
+    screen.getByText(props.title);
   });
 
   test('clicking the button to change section', () => {
-    const button = component.getByText('Go to custom list');
-    button.onclick = handleClick;
+    setup();
+    const button = screen.getByText('Go to custom list');
+    button.onclick = onSpyClick;
     fireEvent.click(button);
 
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(onSpyClick).toHaveBeenCalledTimes(1);
   });
 });

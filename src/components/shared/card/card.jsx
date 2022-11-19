@@ -18,7 +18,7 @@ const Card = ({ id, title, media, fixedWidth = true, isDraggable = false, conten
   const { classes } = useStyles({ isDragging, fixedWidth });
 
   return (
-    <MCard ref={previewRef} className={classes.card} elevation={4}>
+    <MCard ref={previewRef} className={classes.card} elevation={4} data-testid="card">
       {isDraggable && <div ref={dragRef} className={classes.dragHandle} />}
       <CardContent className={classes.imageContainer}>
         <CardMedia
@@ -29,13 +29,17 @@ const Card = ({ id, title, media, fixedWidth = true, isDraggable = false, conten
           className={classes.cardMedia}
         />
       </CardContent>
-      <CardContent className={classes.cardContent}>
+      <CardContent className={classes.cardContent} data-testid="main-content">
         <Typography variant="subtitle" component="div" className={classes.title}>
           {title}
         </Typography>
         {content}
       </CardContent>
-      {actions && <CardActions className={classes.cardActions}>{actions}</CardActions>}
+      {actions && (
+        <CardActions className={classes.cardActions} data-testid="actions">
+          {actions}
+        </CardActions>
+      )}
     </MCard>
   );
 };

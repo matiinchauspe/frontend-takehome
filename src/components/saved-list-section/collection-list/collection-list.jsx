@@ -10,7 +10,7 @@ const CollectionList = () => {
   const { classes } = useStyles();
 
   return (
-    <Grid item container xs={12} className={classes.container}>
+    <Grid item container xs={12} className={classes.container} data-testid="collection-list">
       <List className={classes.list} hasData={Boolean(savedCollections.count)} centered>
         {savedCollections.collections.map(({ id, name, tokens }) => (
           <Item key={`key_${id}`} title={name} items={tokens} itemId={id} />

@@ -3,7 +3,7 @@ import { Select as MSelect, InputLabel, MenuItem, FormControl } from '@mui/mater
 
 import useStyles from './styles';
 
-const Select = ({ items, selectedValue, onChange }) => {
+const Select = ({ label = 'Collections', items, selectedValue, onChange }) => {
   const { classes } = useStyles();
 
   const handleChange = (event) => {
@@ -12,14 +12,8 @@ const Select = ({ items, selectedValue, onChange }) => {
 
   return (
     <FormControl fullWidth className={classes.container}>
-      <InputLabel id="select-collection">Collections</InputLabel>
-      <MSelect
-        labelId="select-collection"
-        id="demo-simple-select"
-        value={selectedValue}
-        label="Collections"
-        onChange={handleChange}
-      >
+      <InputLabel id="select">{label}</InputLabel>
+      <MSelect labelId="select" value={selectedValue} label={label} onChange={handleChange}>
         {items?.map((item) => (
           <MenuItem key={`key_${item.id}`} value={item.id}>
             {item.value}

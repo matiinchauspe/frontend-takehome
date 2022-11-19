@@ -2,6 +2,8 @@
 import { render } from '@testing-library/react';
 import { ThemeProvider, useTheme } from '@mui/material';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { CustomCollectionProvider } from '@components/custom-collection-provider';
 
@@ -11,7 +13,9 @@ const AllTheProviders = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CustomCollectionProvider>
-        <Router>{children}</Router>
+        <Router>
+          <DndProvider backend={HTML5Backend}>{children}</DndProvider>
+        </Router>
       </CustomCollectionProvider>
     </ThemeProvider>
   );

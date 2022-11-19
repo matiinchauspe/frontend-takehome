@@ -1,6 +1,6 @@
 {
-  "extends": "airbnb",
-  "plugins": ["react", "react-hooks"],
+  "extends": ["airbnb", "plugin:testing-library/react"],
+  "plugins": ["react", "react-hooks", "testing-library"],
   "env": {
     "jest": true,
     "browser": true,
@@ -34,7 +34,9 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-wrap-multilines": "off"
+    "react/jsx-wrap-multilines": "off",
+    "testing-library/no-debugging-utils": "warn",
+    "function-paren-newline": "off"
   },
   "globals": {
     "fetch": false

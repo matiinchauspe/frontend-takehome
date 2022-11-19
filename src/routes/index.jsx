@@ -6,6 +6,7 @@ import { Layout } from '@components/layout';
 import { Loading } from '@components/shared';
 
 import { ROUTE_PATHS } from './routes.constants';
+import { history } from './history';
 
 const LazyCreation = lazy(() => import('@pages/creation/creation'));
 const LazyList = lazy(() => import('@pages/saved-list/saved-list'));
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  history,
 ]);
 
 const Routes = () => <RouterProvider router={router} />;

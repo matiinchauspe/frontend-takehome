@@ -16,7 +16,7 @@ const Layout = () => {
   const currentSection = ROUTE_NAME[pathname];
 
   return (
-    <Container maxWidth={false} disableGutters className={classes.container}>
+    <Container data-testid="layout" maxWidth={false} disableGutters className={classes.container}>
       <Header title={title} section={currentSection} />
       <Container maxWidth={false} disableGutters className={classes.main}>
         <Outlet />
