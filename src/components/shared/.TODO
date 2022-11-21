@@ -1,3 +1,4 @@
 - TO CONSIDER 
 -- All shared components use "@mui/material" internally
--- We use these components (shared) only for the rest of the components in the app
+-- Use these components (shared) only for the rest of the components in the app (atoms and molecules)
+-- Mostly are lib (@mui) wrappers so the name "shared" can be consider it to change
