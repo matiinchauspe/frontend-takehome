@@ -21,7 +21,14 @@ const CollectionListItem = ({ itemId, title, items }) => {
   };
 
   return (
-    <Grid container item xs={8} alignItems="center" className={classes.container}>
+    <Grid
+      container
+      item
+      xs={8}
+      alignItems="center"
+      className={classes.container}
+      data-testid="collection-item"
+    >
       {/* Info */}
       <Grid container item xs={8} direction="column">
         <Text variant="h6" gutterBottom className={classes.text}>

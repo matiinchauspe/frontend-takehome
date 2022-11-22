@@ -12,13 +12,13 @@ describe('<CollectionBuild />', () => {
   };
 
   test('renders content', () => {
-    render(
+    const { container } = render(
       <Grid {...props}>
         <div data-testid="child">children</div>
       </Grid>
     );
 
-    const grid = screen.getByTestId('grid');
+    const grid = container;
     const children = screen.getByTestId('child');
 
     expect(grid).toBeInTheDocument();

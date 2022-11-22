@@ -4,7 +4,6 @@ import Select from './select';
 
 describe('<Select />', () => {
   const spyOnSelectChange = jest.fn();
-
   const props = {
     label: 'Collections',
     items: [
@@ -15,24 +14,27 @@ describe('<Select />', () => {
     selectedValue: 'id1',
     onChange: spyOnSelectChange,
   };
-
-  beforeEach(() => {
+  const setup = () => {
     render(<Select {...props} />);
-  });
+  };
 
   test('renders content', () => {
-    const select = screen.getByRole('button');
+    setup();
 
+    const select = screen.getByRole('button');
     expect(select).toBeInTheDocument();
   });
 
   test('checking the initial value', () => {
-    const selectSelected = screen.getByLabelText(props.label);
+    setup();
 
+    const selectSelected = screen.getByLabelText(props.label);
     expect(selectSelected.textContent).toBe('item 1');
   });
 
   test('checking if it change correctly', () => {
+    setup();
+
     const select = screen.getByRole('button');
     fireEvent.mouseDown(select);
 
