@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import browserStorage from 'store';
 
@@ -15,7 +16,6 @@ export const usePersistState = (storageKey, initialState) => {
     if (storageInBrowser) {
       setInternalState(storageInBrowser);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setState = (newState) => {

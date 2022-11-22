@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useCallback, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import { v4 as uuid } from 'uuid';
