@@ -17,6 +17,7 @@ module.exports = {
     '^@utils$': '<rootDir>/src/utils',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
     '^@hooks$': '<rootDir>/src/hooks',
+    '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
     '^@constants$': '<rootDir>/src/constants',
   },
   transformIgnorePatterns: ['/node_modules/(?!(somePkg)|react-dnd|dnd-core|@react-dnd)'],

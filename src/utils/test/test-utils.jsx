@@ -4,7 +4,9 @@ import { ThemeProvider, useTheme } from '@mui/material';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { SWRConfig } from 'swr';
 
+import { SWRConfigValue } from '@api';
 import { CustomCollectionProvider } from '@components/custom-collection-provider';
 
 const AllTheProviders = ({ children }) => {
@@ -12,11 +14,14 @@ const AllTheProviders = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CustomCollectionProvider>
-        <Router>
-          <DndProvider backend={HTML5Backend}>{children}</DndProvider>
-        </Router>
-      </CustomCollectionProvider>
+      {/* avoid caching for the tests */}
+      <SWRConfig value={{ ...SWRConfigValue, dedupingInterval: 0, provider: () => new Map() }}>
+        <CustomCollectionProvider>
+          <Router>
+            <DndProvider backend={HTML5Backend}>{children}</DndProvider>
+          </Router>
+        </CustomCollectionProvider>
+      </SWRConfig>
     </ThemeProvider>
   );
 };

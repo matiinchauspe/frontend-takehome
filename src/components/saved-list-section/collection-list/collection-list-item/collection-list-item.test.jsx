@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { render, screen, waitFor } from '@utils/test';
 import { ROUTE_PATHS } from '@routes/routes.constants';
 import { history } from '@routes/history';
-
 import CollectionListItem from './collection-list-item';
 
 describe('<CollectionListItem />', () => {
@@ -48,7 +47,7 @@ describe('<CollectionListItem />', () => {
     const removeButton = screen.getByRole('button', { name: removeText });
     expect(removeButton).toBeInTheDocument();
     // await userEvent.click(removeButton);
-    // TODO: think the better way to do this since it always will be in the DOM for this case
+    // TODO: missing remove button test
     // expect(removeAsyncBtn).not.toBeInTheDocument();
     // Edit
     const editText = 'Edit';

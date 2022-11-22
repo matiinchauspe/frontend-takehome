@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import useSWR from 'swr';
 
-import { tokensUrl, fetcher } from '@api';
+import { tokensUrl } from '@api';
 import { TokensTransform } from '@services';
 
 export const useTokens = (collectionId) => {
@@ -14,7 +14,6 @@ export const useTokens = (collectionId) => {
           transform: TokensTransform.TokensDataAdapter,
         }
       : null,
-    fetcher,
     { revalidateOnFocus: false }
   );
 

@@ -10,10 +10,10 @@ The user can also edit their collections of tokens and delete them too.
 
 > 1. Clone the repo.
 > 2. Create a `.env` file and add `https://api.reservoir.tools` as a `VITE_APP_API_URL` (view `.env.sample`).
-> 3. `npm i` or `yarn` in the project directory
-> 4. `npm run dev` or `yarn dev` in the project directory
+> 3. `npm i` in the project directory
+> 4. `npm run dev` in the project directory
 
-Run the test: `npm test` or `yarn test`
+Run the test: `npm test` or `npm run test:ci` to view the coverage
 
 ---
 
@@ -23,7 +23,7 @@ In terms of design, this is something I usually use in small projects in terms o
 In this case I tried to respect some of the SOLID concepts and make the app scalable.
 It is largely hook oriented, using a data fetching library for API calls and Context API.
 
-_TO CONSIDER:_ For testing were only added testing of components
+_TO CONSIDER:_ For testing were only added testing of components - and not were completed for time reasons
 
 ---
 

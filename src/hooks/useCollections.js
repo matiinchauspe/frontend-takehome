@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 
-import { collectionsUrl, fetcher } from '@api';
+import { collectionsUrl } from '@api';
 import { CollectionsTransform } from '@services';
 
 export const useCollections = () => {
@@ -10,11 +10,7 @@ export const useCollections = () => {
       /* A function that is transforming the data that is returned from the API. */
       transform: CollectionsTransform.CollectionsDataAdapter,
     },
-    fetcher,
-    {
-      revalidateOnFocus: false,
-      suspense: true,
-    }
+    { revalidateOnFocus: false }
   );
 
   return { data, error, isLoading: isValidating || !data };
