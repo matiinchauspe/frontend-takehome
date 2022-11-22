@@ -61,6 +61,7 @@ const CollectionSelect = () => {
               media={{ src: token.image, type: 'img' }}
               title={token.name}
               isDraggable={!added}
+              data-testid="card-item"
               content={
                 <>
                   <Text className={classes.desc} component="div">

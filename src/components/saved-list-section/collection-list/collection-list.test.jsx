@@ -7,8 +7,8 @@ describe('<CollectionList />', () => {
 
   test('renders content', () => {
     setup();
-    const collection = screen.getByTestId('collection-list');
 
+    const collection = screen.getByTestId('collection-list');
     expect(collection).toBeInTheDocument();
   });
 });
