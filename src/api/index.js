@@ -14,14 +14,12 @@ export const fetcher = ({ url, queryParams = '', transform }) =>
     });
   });
 
-// const SWRConfigValue = {
-//   fetcher,
-//   suspense: true,
-// };
+const SWRConfigValue = {
+  fetcher,
+};
 
 // #Api urls
 const collectionsUrl = `${baseUrl}/collections/v5`;
 const tokensUrl = `${baseUrl}/tokens/v5`;
 
-// export { SWRConfigValue, collectionsUrl, tokensUrl };
-export { collectionsUrl, tokensUrl };
+export { SWRConfigValue, collectionsUrl, tokensUrl };
